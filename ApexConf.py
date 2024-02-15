@@ -1,8 +1,6 @@
 import time
-from threading import Thread
 from pynput import keyboard, mouse
 from pynput.keyboard import Controller, Key
-
 
 def run_in_thread():
     # This boolean variable will control the execution of the listeners
