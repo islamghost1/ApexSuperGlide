@@ -1,6 +1,6 @@
 # Apex super glide :99%  success rate
 
-Sure, here's a README for your script:
+
 
 # Keyboard and Mouse Listener
 
