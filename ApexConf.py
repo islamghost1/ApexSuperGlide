@@ -16,20 +16,20 @@ def run_in_thread():
         nonlocal running, space_pressed
         if key == keyboard.Key.space:
             space_pressed = True
-        elif key == keyboard.Key.esc:
+        elif key == keyboard.Key.f12:
             print('ESC pressed, stopping...')
             running = False  # Stop the listeners
 
     def on_scroll(x, y, dx, dy):
         nonlocal space_pressed
-        if dy < 0 :#and space_pressed:
+        if dy < 0 and space_pressed:
            # Simulate SPACE BAR click
             keyboard_controller.press(Key.space)
             time.sleep(0.0069)
-            
+            keyboard_controller.release(Key.space)
             # c c  cctime.sleep(0.1)
             keyboard_controller.press('c')
-            keyboard_controller.release(Key.space)
+            
             keyboard_controller.release('c')
             
             space_pressed = False  
