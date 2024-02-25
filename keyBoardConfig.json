@@ -1,6 +1,7 @@
 {
-    "start_the_cycle":"space",
-    "jump":"space",
-    "crouch":"c",
+    "climbe_an_object":"space",
+    "perfrom_the_super_Glide":"scroll_down",
+    "in_game_jump":"space",
+    "in_game_crouch":"c",
     "stop_the_program":"f12"
 }

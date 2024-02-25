@@ -1,17 +1,16 @@
 import time
 from pynput import keyboard, mouse
-from pynput.keyboard import Controller, Key , KeyCode
+from pynput.keyboard import Controller, Key, KeyCode
 import json
 from welcome import langingPage
-from welcome import  style
-
+from welcome import style
 
 with open('./keyBoardConfig.json') as f:
-  keys_dict = json.load(f)
+    keys_dict = json.load(f)
 
-#read json config
+# read json config
 def readKeyBoardConfig():
-    global start_the_cycle, jump, crouch, stop_the_program
+    global climbe_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program
 
     def get_key_code(key):
         if len(key) == 1:
@@ -20,16 +19,16 @@ def readKeyBoardConfig():
             try:
                 return getattr(Key, key)
             except AttributeError:
-                raise ValueError(f"Invalid key name: {key}")
+                return key  # If not a known key, assume it's a mouse event
 
-    start_the_cycle = get_key_code(keys_dict["start_the_cycle"])
-    jump = get_key_code(keys_dict["jump"])
-    crouch = get_key_code(keys_dict["crouch"])
+    climbe_an_object = get_key_code(keys_dict["climbe_an_object"])
+    perfrom_the_super_Glide = get_key_code(keys_dict["perfrom_the_super_Glide"])
+    in_game_jump = get_key_code(keys_dict["in_game_jump"])
+    in_game_crouch = get_key_code(keys_dict["in_game_crouch"])
     stop_the_program = get_key_code(keys_dict["stop_the_program"])
 
-
-    print(style.YELLOW+"your config :\n start_the_cycle : {0} ,\n jump : {1} ,\n crouch : {2} ,\n stop_the_program : {3}".format(start_the_cycle, jump, crouch, stop_the_program))
-
+    print(style.YELLOW + "your config :\n climbe_an_object : {0} ,\n perfrom_the_super_Glide : {1} ,\n in_game_jump : {2} ,\n in_game_crouch : {3} ,\n stop_the_program : {4}"
+          .format(climbe_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program))
 
 
 def run_in_thread():
@@ -44,25 +43,35 @@ def run_in_thread():
 
     def on_press(key):
         nonlocal running, space_pressed
-         
-        if key == start_the_cycle:
+
+        if key == climbe_an_object:
             space_pressed = True
         elif key == stop_the_program:
             print('{0} pressed, stopping...'.format(stop_the_program))
             running = False  # Stop the listeners
+        if space_pressed and key == perfrom_the_super_Glide:
+            super_glide()
 
     def on_scroll(x, y, dx, dy):
         nonlocal space_pressed
-        if dy < 0 and space_pressed:
-           # Simulate SPACE BAR click  
-            keyboard_controller.press(jump)
-            time.sleep(0.0069)
-            keyboard_controller.release(jump)        
 
-            keyboard_controller.press(crouch)
-            keyboard_controller.release(crouch)
-            
-            space_pressed = False  
+        if perfrom_the_super_Glide == "scroll_up" and dy > 0 and space_pressed:
+            super_glide()
+        elif perfrom_the_super_Glide == "scroll_down" and dy < 0 and space_pressed:
+            super_glide()
+
+
+    def super_glide():
+        nonlocal space_pressed
+        # Simulate jump and crouch
+        keyboard_controller.press(in_game_jump)
+        time.sleep(0.0069)
+        keyboard_controller.release(in_game_jump)
+
+        keyboard_controller.press(in_game_crouch)
+        keyboard_controller.release(in_game_crouch)
+
+        space_pressed = False
 
     # Setup the listener for the keyboard
     keyboard_listener = keyboard.Listener(on_press=on_press)
@@ -73,19 +82,17 @@ def run_in_thread():
     mouse_listener.start()
 
     # Keep the program running.
-    while running:   
-        time.sleep(0.00000000000000000000001)# Add a small sleep to reduce CPU usage
+    while running:
+        time.sleep(0.00000000000000000000001)  # Add a small sleep to reduce CPU usage
         continue
 
     # Once running becomes False, stop the listeners
     keyboard_listener.stop()
     mouse_listener.stop()
 
-#langing page 
+# langing page
 langingPage()
 # get config
 readKeyBoardConfig()
 # thread that runs the function
 run_in_thread()
-
-
