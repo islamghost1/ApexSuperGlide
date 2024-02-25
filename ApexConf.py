@@ -1,6 +1,36 @@
 import time
 from pynput import keyboard, mouse
-from pynput.keyboard import Controller, Key
+from pynput.keyboard import Controller, Key , KeyCode
+import json
+from welcome import langingPage
+from welcome import  style
+
+
+with open('./keyBoardConfig.json') as f:
+  keys_dict = json.load(f)
+
+#read json config
+def readKeyBoardConfig():
+    global start_the_cycle, jump, crouch, stop_the_program
+
+    def get_key_code(key):
+        if len(key) == 1:
+            return KeyCode.from_char(key)
+        else:
+            try:
+                return getattr(Key, key)
+            except AttributeError:
+                raise ValueError(f"Invalid key name: {key}")
+
+    start_the_cycle = get_key_code(keys_dict["start_the_cycle"])
+    jump = get_key_code(keys_dict["jump"])
+    crouch = get_key_code(keys_dict["crouch"])
+    stop_the_program = get_key_code(keys_dict["stop_the_program"])
+
+
+    print(style.YELLOW+"your config :\n start_the_cycle : {0} ,\n jump : {1} ,\n crouch : {2} ,\n stop_the_program : {3}".format(start_the_cycle, jump, crouch, stop_the_program))
+
+
 
 def run_in_thread():
     # This boolean variable will control the execution of the listeners
@@ -14,23 +44,23 @@ def run_in_thread():
 
     def on_press(key):
         nonlocal running, space_pressed
-        if key == keyboard.Key.space:
+         
+        if key == start_the_cycle:
             space_pressed = True
-        elif key == keyboard.Key.f12:
-            print('ESC pressed, stopping...')
+        elif key == stop_the_program:
+            print('{0} pressed, stopping...'.format(stop_the_program))
             running = False  # Stop the listeners
 
     def on_scroll(x, y, dx, dy):
         nonlocal space_pressed
         if dy < 0 and space_pressed:
-           # Simulate SPACE BAR click
-            keyboard_controller.press(Key.space)
+           # Simulate SPACE BAR click  
+            keyboard_controller.press(jump)
             time.sleep(0.0069)
-            keyboard_controller.release(Key.space)
-            # c c  cctime.sleep(0.1)
-            keyboard_controller.press('c')
-            
-            keyboard_controller.release('c')
+            keyboard_controller.release(jump)        
+
+            keyboard_controller.press(crouch)
+            keyboard_controller.release(crouch)
             
             space_pressed = False  
 
@@ -51,6 +81,11 @@ def run_in_thread():
     keyboard_listener.stop()
     mouse_listener.stop()
 
-
+#langing page 
+langingPage()
+# get config
+readKeyBoardConfig()
 # thread that runs the function
 run_in_thread()
+
+
