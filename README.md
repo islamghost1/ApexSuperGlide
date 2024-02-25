@@ -8,7 +8,7 @@ This script allows you to perform a super glide in Apex Legends. A super glide i
 ## Installation
 
 1. Download the zip file from the releases page.
-2. The `keyBoardConfig.json` configuration file must be in the same directory as the `ApexConf.exe`. You can modify key binding as needed.
+2. The `keyBoardConfig.json` configuration file must be in the same directory as the `ApexConf.exe`. You can modify key bindings as needed.
 3. execute the `ApexConf.exe` file.
 
 
