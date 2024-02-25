@@ -10,7 +10,7 @@ with open('./keyBoardConfig.json') as f:
 
 # read json config
 def readKeyBoardConfig():
-    global climbe_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program
+    global climb_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program
 
     def get_key_code(key):
         if len(key) == 1:
@@ -21,14 +21,14 @@ def readKeyBoardConfig():
             except AttributeError:
                 return key  # If not a known key, assume it's a mouse event
 
-    climbe_an_object = get_key_code(keys_dict["climbe_an_object"])
+    climb_an_object = get_key_code(keys_dict["climb_an_object"])
     perfrom_the_super_Glide = get_key_code(keys_dict["perfrom_the_super_Glide"])
     in_game_jump = get_key_code(keys_dict["in_game_jump"])
     in_game_crouch = get_key_code(keys_dict["in_game_crouch"])
     stop_the_program = get_key_code(keys_dict["stop_the_program"])
 
-    print(style.YELLOW + "your config :\n climbe_an_object : {0} ,\n perfrom_the_super_Glide : {1} ,\n in_game_jump : {2} ,\n in_game_crouch : {3} ,\n stop_the_program : {4}"
-          .format(climbe_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program))
+    print(style.YELLOW + "your config :\n climb_an_object : {0} ,\n perfrom_the_super_Glide : {1} ,\n in_game_jump : {2} ,\n in_game_crouch : {3} ,\n stop_the_program : {4}"
+          .format(climb_an_object, perfrom_the_super_Glide, in_game_jump, in_game_crouch, stop_the_program))
 
 
 def run_in_thread():
@@ -44,7 +44,7 @@ def run_in_thread():
     def on_press(key):
         nonlocal running, space_pressed
 
-        if key == climbe_an_object:
+        if key == climb_an_object:
             space_pressed = True
         elif key == stop_the_program:
             print('{0} pressed, stopping...'.format(stop_the_program))
