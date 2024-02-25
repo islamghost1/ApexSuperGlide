@@ -28,3 +28,8 @@ The JSON configuration file looks like this:
   "in_game_crouch": "c",
   "stop_the_program": "f12"
 }
+```
+## Screen capture of how the `.exe` looks like once launched
+<p align="center">
+  <img src="https://github.com/islamghost1/ApexSuperGlide/assets/57948466/4e7a17bf-3d87-4b9e-bfa2-6c2ef9efd27a">
+</p>
