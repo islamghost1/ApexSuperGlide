@@ -12,7 +12,7 @@ This script allows you to perform a super glide in Apex Legends. A super glide i
 3. Execute the `ApexConf.exe` file.
 
 ## How to Use
-1. Click `climb_an_object` button to climb an object.
+1. Click `start_cycle` button to start the cycle (I usually use it for both jumping and starting the cycle).
 2. When you are on the edge of that object, click `perform_the_super_Glide` button  to perform a super glide. in case of `scroll_down` event , just scroll the mouse wheel.
 3. When you're done, click `stop_the_program` button to stop the program.
 4. Enjoy.
@@ -22,7 +22,7 @@ The JSON configuration file looks like this:
 
 ```json
 {
-  "climb_an_object": "space",
+  "start_cycle": "space",
   "perform_the_super_Glide": "scroll_down",
   "in_game_jump": "space",
   "in_game_crouch": "c",
