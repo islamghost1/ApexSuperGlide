@@ -74,7 +74,7 @@ def readKeyBoardConfig():
     in_game_jump = get_key_code(keys_dict["in_game_jump"])
     in_game_crouch = get_key_code(keys_dict["in_game_crouch"])
     stop_the_program = get_key_code(keys_dict["stop_the_program"])
-    show_menu = Key.f11  # F11 is hardcoded for menu functionality
+    show_menu = Key.f10  # F10 is hardcoded for menu functionality
     
     print(style.YELLOW + "Your config:\n start_cycle: {0}\n perfrom_the_super_Glide: {1}\n in_game_jump: {2}\n in_game_crouch: {3}\n stop_the_program: {4}"
           .format(keys_dict["start_cycle"], keys_dict["perfrom_the_super_Glide"], keys_dict["in_game_jump"], keys_dict["in_game_crouch"], keys_dict["stop_the_program"]))

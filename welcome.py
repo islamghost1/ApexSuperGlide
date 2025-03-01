@@ -22,7 +22,7 @@ def landingPage():
                                                  .@@@@@@:       %@@@@@=  
                                                    :@*            -%*    
     ''')
-    print(style.GREEN + "Press F11 for menu." + style.RESET)
+    print(style.GREEN + "Press F10 for menu." + style.RESET)
 class style():
     BLACK = '\033[30m'
     RED = '\033[31m'
