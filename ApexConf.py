@@ -97,22 +97,35 @@ def display_menu():
     print("Press 1 or 2 to select an option (ESC to exit):")
 
 # Create a dynamic width box based on content
+import re
+
 def create_dynamic_box(title, content_lines):
-    # Find the longest line to determine box width
-    max_length = max(len(title), max(len(line) for line in content_lines))
-    box_width = max_length + 8  # Add padding
-    
-    # Create the box
-    box_top = "╔" + "═" * box_width + "╗"
-    title_line = "║" + title.center(box_width) + "║"
-    separator = "╠" + "═" * box_width + "╣"
-    box_bottom = "╚" + "═" * box_width + "╝"
-    
-    # Create content lines
-    formatted_content = []
-    for line in content_lines:
-        formatted_content.append("║" + line.ljust(box_width) + "║")
-    
+    # Remove color codes for width calculation
+    def strip_color(text):
+        return re.sub(r'\x1b\[[0-9;]*m', '', text)
+
+    # Calculate the maximum visible length of title and content
+    max_content_length = max(len(strip_color(line)) for line in content_lines)
+    content_width = max(len(strip_color(title)), max_content_length) + 4  # 2 spaces padding on each side
+    box_width = content_width + 2  # Add 2 for left and right borders
+
+    # Format lines with padding and alignment
+    def format_line(text, align='left'):
+        stripped_text = strip_color(text)
+        if align == 'left':
+            padded_text = "  " + stripped_text.ljust(content_width - 4) + "  "
+        elif align == 'center':
+            padded_text = "  " + stripped_text.center(content_width - 4) + "  "
+        # Preserve color codes by appending spaces to match padded length
+        return text + ' ' * (len(padded_text) - len(stripped_text))
+
+    # Construct the box
+    box_top = "╔" + "═" * content_width + "╗"
+    title_line = "║" + format_line(title, align='center') + "║"
+    separator = "╠" + "═" * content_width + "╣"
+    formatted_content = ["║" + format_line(line) + "║" for line in content_lines]
+    box_bottom = "╚" + "═" * content_width + "╝"
+
     # Combine all parts
     box = [box_top, title_line, separator] + formatted_content + [box_bottom]
     return "\n".join(box)
