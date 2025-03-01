@@ -1,7 +1,7 @@
 {
-    "start_cycle":"space",
-    "perfrom_the_super_Glide":"scroll_down",
-    "in_game_jump":"space",
-    "in_game_crouch":"c",
-    "stop_the_program":"f12"
+    "start_cycle": "space",
+    "perfrom_the_super_Glide": "scroll_down",
+    "in_game_jump": "space",
+    "in_game_crouch": "c",
+    "stop_the_program": "f12"
 }

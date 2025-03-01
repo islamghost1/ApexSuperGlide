@@ -1,4 +1,4 @@
-def langingPage():
+def landingPage():
     print(style.CYAN+'''
                     .dP"Y8 88   88 88""Yb 888888 88""Yb      dP""b8 88     88 8888b.  888888             
                     `Ybo." 88   88 88__dP 88__   88__dP     dP   `" 88     88  8I  Yb 88__               
@@ -22,6 +22,7 @@ def langingPage():
                                                  .@@@@@@:       %@@@@@=  
                                                    :@*            -%*    
     ''')
+    print(style.GREEN + "Press F11 for menu." + style.RESET)
 class style():
     BLACK = '\033[30m'
     RED = '\033[31m'
